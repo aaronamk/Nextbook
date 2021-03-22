@@ -14,25 +14,20 @@ This will be built with the Django web framework, which utilizes the Python prog
 
 # References
 Integrated Textbook: Augmenting Paper Textbooks with Digital Learning Support Using Digital Pens:
-
 https://ieeexplore.ieee.org/document/1652516
 
 
 The future of textbooks looks like this:
-
 https://www.ecampusnews.com/2016/02/22/digital-textbooks-faculty-177/
 
 
 Infographic: Textbook Costs Skyrocket 812% in 35 Years:
-
 https://www.aeseducation.com/blog/infographic-the-skyrocketing-cost-of-textbooks-for-schools-students
 
 
 The Power of Crowdsourcing:
-
 https://www.forbes.com/sites/martenmickos/2020/06/23/the-power-of-crowdsourcing/?sh=4acf366230b4
 
 
 That Digital Textbook? Your College Has Billed You for It:
-
 https://www.nytimes.com/2020/02/28/your-money/college-digital-textbooks.html
