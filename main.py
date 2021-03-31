@@ -6,9 +6,17 @@ nextbook = Flask(__name__)
 def home():
     return "Home Page"
 
-@nextbook.route("/full-list")
-def full_list():
+@nextbook.route("/class-list")
+def class_list():
     return "full list"
+
+@nextbook.route("/add-book")
+def full_list():
+    return "add a book"
+
+@nextbook.route("/about")
+def full_list():
+    return "We are cool bros!"
 
 if __name__ == "__main__":
     nextbook.run()
