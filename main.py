@@ -19,7 +19,7 @@ def search():
 
 @nextbook.route("/results/<filter>/<phrase>")
 def results(filter, phrase):
-    return f"Searching by {filter} for {phrase}"
+    return f"Searching by {filter[3:]} for {phrase}"
 
 
 @nextbook.route("/class-list")
