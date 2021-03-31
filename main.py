@@ -17,9 +17,11 @@ def search():
         return redirect(url_for('results', filter = filter, phrase = phrase))
 
 
-@nextbook.route("/results/<filter>/<phrase>")
+@nextbook.route("/search?filter=<filter>&q=<phrase>")
 def results(filter, phrase):
-    return f"Searching by {filter[3:]} for {phrase}"
+    if filter not in ["title", "isbn", "class", "professor"]:
+        return f"Invalid search filter: {filter}"
+    return f"Searched by {filter} for {phrase}"
 
 
 @nextbook.route("/class-list")
