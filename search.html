@@ -1,0 +1,17 @@
+<html>
+  <body>
+    <form action = "http://localhost:5000/" method = "post">
+      <p>
+        <input type = "text" name = "phrase" />
+        <label for="filter">filter: </label>
+        <select name="filter" id="filter">
+          <option value="by-title">Title</option>
+          <option value="by-isbn">ISBN</option>
+          <option value="by-class">Class</option>
+          <option value="by-professor">Professor</option>
+        </select>
+        <input type = "submit" value = "search" />
+      </p>
+    </form>
+  </body>
+</html>

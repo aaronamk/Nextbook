@@ -7,16 +7,19 @@ nextbook = Flask(__name__)
 @nextbook.route("/", methods = ['POST', 'GET'])
 def search():
     if request.method == "POST":
-        test = request.form["phrase"]
-        return redirect(url_for('results', filter = "class", phrase = test))
+        phrase = request.form["phrase"]
+        filter = request.form["filter"]
+        return redirect(url_for('results', filter = filter, phrase = phrase))
     else:
         test = request.args.get("phrase")
-        return redirect(url_for('results', filter = "class", phrase = test))
+        test = request.args.get("filter")
+        filter = request.form["filter"]
+        return redirect(url_for('results', filter = filter, phrase = phrase))
 
 
 @nextbook.route("/results/<filter>/<phrase>")
 def results(filter, phrase):
-    return f"Search by {filter}: {phrase}"
+    return f"Searching by {filter} for {phrase}"
 
 
 @nextbook.route("/class-list")
