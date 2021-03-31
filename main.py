@@ -11,11 +11,11 @@ def class_list():
     return "full list"
 
 @nextbook.route("/add-book")
-def full_list():
+def add_book():
     return "add a book"
 
 @nextbook.route("/about")
-def full_list():
+def about():
     return "We are cool bros!"
 
 if __name__ == "__main__":
