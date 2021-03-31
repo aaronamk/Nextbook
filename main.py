@@ -3,8 +3,12 @@ from flask import Flask
 nextbook = Flask(__name__)
 
 @nextbook.route("/")
-def home():
-    return "Home Page"
+def search():
+    return "Search: "
+
+@nextbook.route("/results/<filter>/<phrase>")
+def results(filter, phrase):
+    return f"Search by {filter}: {phrase}"
 
 @nextbook.route("/class-list")
 def class_list():
