@@ -10,7 +10,7 @@ def search():
     if request.method == "POST":
         phrase = quote_plus(request.form["phrase"])
         filter = quote_plus(request.form["filter"])
-        return redirect(f"search/?filter={filter}&q={phrase}")
+        return redirect(f"search?filter={filter}&q={phrase}")
     else:
         test = request.args.get("phrase")
         test = request.args.get("filter")
@@ -18,7 +18,7 @@ def search():
         return redirect("asdf")
 
 
-@nextbook.route("/search/")
+@nextbook.route("/search")
 def results():
     return " | ".join(f"{k}: {v}" for k, v in request.args.items())
 
