@@ -1,27 +1,23 @@
-from flask import Flask, redirect, url_for, request
+from urllib.parse import quote_plus
+from flask import Flask, redirect, url_for, render_template, request
 
 
 nextbook = Flask(__name__)
 
 
-@nextbook.route("/", methods = ['POST', 'GET'])
+@nextbook.route("/", methods = ['GET', 'POST'])
 def search():
     if request.method == "POST":
-        phrase = request.form["phrase"]
-        filter = request.form["filter"]
-        return redirect(url_for('results', filter = filter, phrase = phrase))
+        phrase = quote_plus(request.form["phrase"])
+        filter = quote_plus(request.form["filter"])
+        return redirect(f"search?filter={filter}&q={phrase}")
     else:
-        test = request.args.get("phrase")
-        test = request.args.get("filter")
-        filter = request.form["filter"]
-        return redirect(url_for('results', filter = filter, phrase = phrase))
+        return render_template("search.html")
 
 
-@nextbook.route("/search?filter=<filter>&q=<phrase>")
-def results(filter, phrase):
-    if filter not in ["title", "isbn", "class", "professor"]:
-        return f"Invalid search filter: {filter}"
-    return f"Searched by {filter} for {phrase}"
+@nextbook.route("/search")
+def results():
+    return " | ".join(f"{k}: {v}" for k, v in request.args.items())
 
 
 @nextbook.route("/class-list")
