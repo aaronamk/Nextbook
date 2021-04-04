@@ -1,21 +1,18 @@
 from urllib.parse import quote_plus
-from flask import Flask, redirect, url_for, request
+from flask import Flask, redirect, url_for, render_template, request
 
 
 nextbook = Flask(__name__)
 
 
-@nextbook.route("/", methods = ['POST', 'GET'])
+@nextbook.route("/", methods = ['GET', 'POST'])
 def search():
     if request.method == "POST":
         phrase = quote_plus(request.form["phrase"])
         filter = quote_plus(request.form["filter"])
         return redirect(f"search?filter={filter}&q={phrase}")
     else:
-        test = request.args.get("phrase")
-        test = request.args.get("filter")
-        filter = request.form["filter"]
-        return redirect("asdf")
+        return render_template("search.html")
 
 
 @nextbook.route("/search")
