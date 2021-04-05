@@ -9,6 +9,8 @@ nextbook = Flask(__name__)
 def search():
     if request.method == "POST":
         phrase = quote_plus(request.form["phrase"])
+        if phrase == "":
+            return render_template("search.html")
         filter = quote_plus(request.form["filter"])
         return redirect(f"search?filter={filter}&q={phrase}")
     else:
