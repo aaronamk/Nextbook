@@ -23,28 +23,34 @@ def results():
     return " | ".join(f"{k}: {v}" for k, v in request.args.items())
 
 
-@nextbook.route("/class-list")
-def class_list():
+@nextbook.route("/course-list")
+def course_list():
     return "full list"
-
-
 
 
 @nextbook.route("/add-book", methods = ['GET', 'POST'])
 def add_book():
     if request.method == "POST":
-            title = quote_plus(request.form["title"])
-            author = quote_plus(request.form["author"])
-            isbn = quote_plus(request.form["isbn"])
-            professor = quote_plus(request.form["professor"])
-            Class = quote_plus(request.form["Class"])
-            return redirect(url_for("book_page"))
-    else:
-        return render_template("AddBook.html")
+        in_isbn = request.form["isbn"]
+        in_title = request.form["title"]
+        in_author = request.form["author"]
+        in_professor = request.form["professor"]
+        in_course = request.form["course"]
 
-@nextbook.route("/book-page")
-def book_page():
-    return render_template("Book-Page.html")
+        # interface with the database here to add the book
+
+        return redirect(url_for("book_page", isbn = in_isbn))
+    else:
+        return render_template("add-book.html")
+
+
+@nextbook.route("/book/<isbn>")
+def book_page(isbn):
+    return render_template("book-info.html", isbn = isbn,
+                                            title = "Introduction to Algorithms",
+                                           author = "Thomas H. Cormen",
+                                        professor = "Peter Kemper",
+                                           course = "CSCI 303, Algorithms")
 
 @nextbook.route("/about")
 def about():
