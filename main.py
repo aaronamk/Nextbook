@@ -12,6 +12,7 @@ def search():
         if phrase == "":
             return render_template("search.html")
         filter = quote_plus(request.form["filter"])
+
         return redirect(f"search?filter={filter}&q={phrase}")
     else:
         return render_template("search.html")
@@ -27,9 +28,24 @@ def class_list():
     return "full list"
 
 
-@nextbook.route("/add-book")
+
+
+@nextbook.route("/add-book", methods = ['GET', 'POST'])
 def add_book():
-    return "add a book"
+    if request.method == "POST":
+            print("here")
+            title = quote_plus(request.form["title"])
+            author = quote_plus(request.form["author"])
+            isbn = quote_plus(request.form["isbn"])
+            professor = quote_plus(request.form["professor"])
+            Class = quote_plus(request.form["Class"])
+            print(isbn)
+            return redirect(f"added-book?title={title}&author={author}&isbn={isbn}&professor={professor}&Class={Class}")
+    else:
+        return render_template("AddBook.html")
+@nextbook.route("/added-book")
+def book_results():
+    return "Thanks, " + request.args.get("title")+ " by " + request.args.get("author") + " has been added to our book list!"
 
 
 @nextbook.route("/about")
