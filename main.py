@@ -33,20 +33,18 @@ def class_list():
 @nextbook.route("/add-book", methods = ['GET', 'POST'])
 def add_book():
     if request.method == "POST":
-            print("here")
             title = quote_plus(request.form["title"])
             author = quote_plus(request.form["author"])
             isbn = quote_plus(request.form["isbn"])
             professor = quote_plus(request.form["professor"])
             Class = quote_plus(request.form["Class"])
-            print(isbn)
-            return redirect(f"added-book?title={title}&author={author}&isbn={isbn}&professor={professor}&Class={Class}")
+            return redirect(url_for("book_page"))
     else:
         return render_template("AddBook.html")
-@nextbook.route("/added-book")
-def book_results():
-    return "Thanks, " + request.args.get("title")+ " by " + request.args.get("author") + " has been added to our book list!"
 
+@nextbook.route("/book-page")
+def book_page():
+    return render_template("Book-Page.html")
 
 @nextbook.route("/about")
 def about():
