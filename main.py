@@ -37,7 +37,7 @@ def add_book():
         in_professor = request.form["professor"]
         in_course = request.form["course"]
 
-        # interface with the database here to add the book
+        # TODO: interface with the database here to add the book
 
         return redirect(url_for("book_page", isbn = in_isbn))
     else:
@@ -46,11 +46,13 @@ def add_book():
 
 @nextbook.route("/book/<isbn>")
 def book_page(isbn):
-    return render_template("book-info.html", isbn = isbn,
-                                            title = "Introduction to Algorithms",
-                                           author = "Thomas H. Cormen",
-                                        professor = "Peter Kemper",
-                                           course = "CSCI 303, Algorithms")
+    return render_template("book-info.html",
+                                isbn = isbn,
+                               title = "Introduction to Algorithms",
+                              author = "Thomas H. Cormen",
+                           professor = "Peter Kemper",
+                              course = "CSCI 303, Algorithms")
+
 
 @nextbook.route("/about")
 def about():
