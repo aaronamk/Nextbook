@@ -23,9 +23,9 @@ def results():
     return " | ".join(f"{k}: {v}" for k, v in request.args.items())
 
 
-@nextbook.route("/course-list")
+@nextbook.route("/class-list")
 def course_list():
-    return "full list"
+    return render_template("major-directory.html")
 
 
 @nextbook.route("/add-book", methods = ['GET', 'POST'])
