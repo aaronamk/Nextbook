@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<html>
+  <head>
+    <title>{% block title %}{% endblock %} - Nextbook</title>
+  </head>
+
+  <body>
+    <style>
+      :root {
+        --bg0: #2e3440;
+        --bg1: #3b4252;
+        --bg2: #434c5e;
+        --bg3: #4c566a;
+        --fg0: #d8dee9;
+        --fg1: #e5e9f0;
+        --fg2: #eceff4;
+        --hl-bg: #a3be8c;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: var(--bg0);
+        color: var(--fg2);
+      }
+
+      .topnav {
+        overflow: hidden;
+        background-color: var(--bg1);
+      }
+
+      .topnav a {
+        float: left;
+        color: var(--fg2);
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+
+      .topnav a:hover {
+        background-color: var(--bg0);
+      }
+
+      .topnav a.active {
+        background-color: var(--hl-bg);
+        color: var(--bg0);
+      }
+
+      div.center {
+        text-align: center;
+        padding-top: 3cm;
+      }
+
+      div.left {
+        text-align: left;
+        padding-top: 3cm;
+        padding-left: 3cm;
+      }
+
+      div.box {
+        padding-top: 3cm;
+        background-color: black;
+        width: 300px;
+        border: 5px solid white;
+        padding: 10px;
+        margin: auto;
+      }
+    </style>
+
+    <div class="topnav">
+      <a href = "/" {% block bar_home %}{% endblock %}>Home</a>
+      <a href="class-list" {% block bar_full_list %}{% endblock %}>Class List</a>
+      <a href="add-book" {% block bar_add_book %}{% endblock %}> Add Book</a>
+      <a href="about" {% block bar_about %}{% endblock %}>About</a>
+    </div>
+
+    {% block body %}{% endblock %}
+
+  </body>
+</html>
