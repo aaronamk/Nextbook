@@ -1,3 +1,5 @@
 install flask with pip: "pip install flask" on the command line.
 
 Then simply run "python3 main.py" from the Code folder, and navigate to http://127.0.0.1:5000 in your browser.
+
+As of now, the code is sufficient as a snapshot of how our site might work when finished. As it is not connected to a database, it can not be used productively. It serves as an improved site outline, and proof that we can work with flask.
