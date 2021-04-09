@@ -24,4 +24,4 @@ before_script:
 test:
   variables:
   script:
-    - python manage.py test
+    - python Code/main.py test
