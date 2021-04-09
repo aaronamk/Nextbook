@@ -1,0 +1,13 @@
+Generic SQL
+https://python-adv-web-apps.readthedocs.io/en/latest/flask_db1.html
+https://blog.appseed.us/flask-how-to-connect-to-mysql/
+
+MongoDB
+https://pythonbasics.org/flask-mongodb/
+
+SQLite (Local NOT distributed)
+https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/
+
+
+If we have access to a remote server, MongoDB or MySQL (or PostgreSQL) might be the best option.
+If not SQLite is not remote, and as such can be picked up by Gitlab, however it will require us to be careful with keeping database info up to date.
