@@ -56,7 +56,7 @@ def book_page(isbn):
 
 @nextbook.route("/about")
 def about():
-    return "We are cool bros!"
+    return render_template("about.html")
 
 
 if __name__ == "__main__":
