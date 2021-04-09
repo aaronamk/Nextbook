@@ -26,6 +26,10 @@
         color: var(--fg2);
       }
 
+      .body {
+        padding-top: 1cm;
+      }
+
       .topnav {
         overflow: hidden;
         background-color: var(--bg1);
@@ -49,9 +53,17 @@
         color: var(--bg0);
       }
 
+      .link {
+        color: var(--hl-bg);
+      }
+
+      .link:hover {
+        color: var(--bg0);
+        background-color: var(--hl-bg);
+      }
+
       div.center {
         text-align: center;
-        padding-top: 3cm;
       }
 
       div.left {
@@ -73,11 +85,11 @@
     <div class="topnav">
       <a href = "/" {% block bar_home %}{% endblock %}>Home</a>
       <a href="/class-list" {% block bar_full_list %}{% endblock %}>Class List</a>
-      <a href="/add-book" {% block bar_add_book %}{% endblock %}> Add Book</a>
+      <a href="/add-book" {% block bar_add_book %}{% endblock %}>Add Book</a>
       <a href="/about" {% block bar_about %}{% endblock %}>About</a>
     </div>
 
-    {% block body %}{% endblock %}
+    <div class="body">{% block body %}{% endblock %}</div>
 
   </body>
 </html>
