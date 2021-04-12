@@ -10,7 +10,7 @@ are taking to a certain extent, Nextbook is the all-in-one destination for findi
 _**<div align="center"> "Know the true value of your next book!"</div>**_
 
 # Technologies
-This will be built with the Flask web framework, which utilizes the Python programming language. As it is lightweight, we will also use SQLite as the database.
+This will be built with the Flask web framework, which utilizes the Python programming language. As it is lightweight, we will also use MySQL as the database.
 
 # References
 Integrated Textbook: Augmenting Paper Textbooks with Digital Learning Support Using Digital Pens:
