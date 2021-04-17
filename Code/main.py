@@ -32,12 +32,12 @@ def search():
 
 @nextbook.route("/search")
 def results():
-    return " | ".join(f"{k}: {v}" for k, v in request.args.items())
-
+    return render_template("results.html")
 
 @nextbook.route("/class-list")
 def course_list():
     return render_template("major-directory.html")
+
 
 @nextbook.route("/add-book", methods = ['GET', 'POST'])
 def add_book():

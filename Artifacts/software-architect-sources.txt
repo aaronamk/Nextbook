@@ -1,0 +1,4 @@
+https://zetcode.com/python/jinja/
+https://www.tutorialspoint.com/flask/flask_quick_guide.htm
+https://dev.to/brunooliveira/flask-series-part-9-adding-a-navbar-by-using-template-inheritance-2e5o
+https://www.tutorialspoint.com/flask/flask_routing.htm

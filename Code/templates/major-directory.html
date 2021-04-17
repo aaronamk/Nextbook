@@ -1,0 +1,102 @@
+{% extends "top-bar.html" %}
+
+{% block title %}Major Directory{% endblock %}
+
+{% block bar_full_list %}class="active"{% endblock %}
+
+{% block body %}
+<style>
+  .col {
+    float:left;
+    width:50%;
+  }
+  .wrap:after {
+    content:"";
+    display:table;
+    clear: both;
+  }
+</style>
+<div class="center">
+  <h1>Major Directory</h1>
+  <h3>Select the major your class is under</h3>
+  <div class="wrap">
+    <div class="col">
+      <a class="link" href = "/" style="outline:none;">Africana Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">American Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">Anthropology</a><br>
+      <a class="link" href = "/" style="outline:none;">Applied Science</a><br>
+      <a class="link" href = "/" style="outline:none;">Arabic</a><br>
+      <a class="link" href = "/" style="outline:none;">Art</a><br>
+      <a class="link" href = "/" style="outline:none;">Art History</a><br>
+      <a class="link" href = "/" style="outline:none;">Asian & Middle Eastern Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">Asian & Pac Islander American Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">Biology</a><br>
+      <a class="link" href = "/" style="outline:none;">Business Administration</a><br>
+      <a class="link" href = "/" style="outline:none;">Chemistry</a><br>
+      <a class="link" href = "/" style="outline:none;">Chinese</a><br>
+      <a class="link" href = "/" style="outline:none;">Classical Civilization</a><br>
+      <a class="link" href = "/" style="outline:none;">College Courses</a><br>
+      <a class="link" href = "/" style="outline:none;">Community Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">Comp/App Math & Stats</a><br>
+      <a class="link" href = "/" style="outline:none;">Computer Science</a><br>
+      <a class="link" href = "/" style="outline:none;">Conservation</a><br>
+      <a class="link" href = "/" style="outline:none;">Creative Writing</a><br>
+      <a class="link" href = "/" style="outline:none;">Curriculum & Instruction</a><br>
+      <a class="link" href = "/" style="outline:none;">Dance</a><br>
+      <a class="link" href = "/" style="outline:none;">Data Science</a><br>
+      <a class="link" href = "/" style="outline:none;">Economics</a><br>
+      <a class="link" href = "/" style="outline:none;">Ed Policy Planning Leadership</a><br>
+      <a class="link" href = "/" style="outline:none;">Education</a><br>
+      <a class="link" href = "/" style="outline:none;">Elementary Education</a><br>
+      <a class="link" href = "/" style="outline:none;">Eng Phys & Applied Design</a><br>
+      <a class="link" href = "/" style="outline:none;">English</a><br>
+      <a class="link" href = "/" style="outline:none;">Environmental Science & Policy</a><br>
+      <a class="link" href = "/" style="outline:none;">European Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">Film and Media Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">French & Francophone Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">Gender/Sexuality & Women's Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">Geographic Information Systems</a><br>
+      <a class="link" href = "/" style="outline:none;">Geology</a><br>
+      <a class="link" href = "/" style="outline:none;">German Studies</a><br>
+    </div>
+    <div class="col">
+      <a class="link" href = "/" style="outline:none;">Global Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">Government</a><br>
+      <a class="link" href = "/" style="outline:none;">Graduate</a><br>
+      <a class="link" href = "/" style="outline:none;">Greek</a><br>
+      <a class="link" href = "/" style="outline:none;">Health Sciences</a><br>
+      <a class="link" href = "/" style="outline:none;">Hebrew</a><br>
+      <a class="link" href = "/" style="outline:none;">Hispanic Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">History</a><br>
+      <a class="link" href = "/" style="outline:none;">Interdisciplinary Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">International Relations</a><br>
+      <a class="link" href = "/" style="outline:none;">Italian</a><br>
+      <a class="link" href = "/" style="outline:none;">Japanese</a><br>
+      <a class="link" href = "/" style="outline:none;">Kinesiology & Health Sciences</a><br>
+      <a class="link" href = "/" style="outline:none;">Latin</a><br>
+      <a class="link" href = "/" style="outline:none;">Latin American Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">Law</a><br>
+      <a class="link" href = "/" style="outline:none;">Linguistics</a><br>
+      <a class="link" href = "/" style="outline:none;">Marine Science</a><br>
+      <a class="link" href = "/" style="outline:none;">Mathematics</a><br>
+      <a class="link" href = "/" style="outline:none;">Medieval & Renaissance Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">Military Science</a><br>
+      <a class="link" href = "/" style="outline:none;">Modern Languages/Literatures</a><br>
+      <a class="link" href = "/" style="outline:none;">Music</a><br>
+      <a class="link" href = "/" style="outline:none;">Neuroscience</a><br>
+      <a class="link" href = "/" style="outline:none;">Philosophy</a><br>
+      <a class="link" href = "/" style="outline:none;">Physics</a><br>
+      <a class="link" href = "/" style="outline:none;">Psychology</a><br>
+      <a class="link" href = "/" style="outline:none;">Public Health</a><br>
+      <a class="link" href = "/" style="outline:none;">Public Policy</a><br>
+      <a class="link" href = "/" style="outline:none;">Religious Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">Russian</a><br>
+      <a class="link" href = "/" style="outline:none;">Russian & Post-Soviet Studies</a><br>
+      <a class="link" href = "/" style="outline:none;">Sociology</a><br>
+      <a class="link" href = "/" style="outline:none;">Speech</a><br>
+      <a class="link" href = "/" style="outline:none;">Theatre</a><br>
+      <a class="link" href = "/" style="outline:none;">Writing</a><br>
+    </div>
+  </div>
+</div>
+{% endblock %}
