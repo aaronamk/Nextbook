@@ -1,10 +1,31 @@
 {% extends "top-bar.html" %}
-
 {% block title %}{{ title }}{% endblock %}
-
 {% block body %}
-<div class = "center">
-  <h1>{{ title }}</h1>
+<style>
+  /* Both Box splithelps organize the elements*/
+   .boxSplit {
+   float: left;
+   width: 33.33%;
+   padding: 80px;
+   }
+   .clearfix::after {
+   content: "";
+   clear: both;
+   display: table;
+   }
+
+   /* form popup to edit price */
+  .form-popup {
+    display: none;
+    z-index: 9;
+  }
+
+  /* Add styles to the form container */
+  .form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: black;
+  }
 
   <img src="{{ url_for('static', filename='Algorithms.jpg') }}" /> <br>
   <div class = "box">
@@ -14,12 +35,64 @@
     Professors: {{ professor }}<BR>
     Utility Rating: {{ rating }}<BR>
   </div>
-</div>
+  /* Full-width input fields */
+  .form-container input[type=text], .form-container input[type=text] {
+    width: 80%;
+    padding: 15px;
+    margin: 5px 0 15px 0;
+    border: none;
+    background: white;
+  }
 
+
+</style>
+<div class = "center">
+<h1>{{ title }}</h1>
+<div class = "clearfix">
+   <div class="boxSplit">
+      <img src="{{ url_for('static', filename='Algorithms.jpg') }}" /> <br>
+   </div>
+   <div class = "boxSplit" style = "background-color: bg3">
+      Author: {{ author }}<BR>
+      ISBN: {{ isbn }}<BR>
+      Course: {{ course }}<BR>
+      Professors: {{ professor }}<BR>
+      Utility Rating: {{ rating }}<BR>
+
+   </div>
+   <div class= "boxSplit">
+      <h1> Where to Buy </h1>
+      <p> Lowest Price:  {{price}} <BR>     </p>
+      <a href={{ link }} class="button">Buy Now</a>
+      <button class="button" onclick="openForm()">Change Price</button>
+   </div>
+</div>
+<div class="form-popup" id="myForm">
+   <form action="/book/{{ isbn }}" method = "POST" class="form-container">
+      <h1>Change Price</h1>
+      <p> If you found a better price please let us know, so that everyone will be able to find the cheapest textbook</p>
+      <BR<
+      <label for="price"><b>Price</b></label>
+      <input type="text" placeholder="Enter price in $" name="price" required><BR>
+      <label for="link"><b>Link</b></label>
+      <input type="text" placeholder="Enter the url to buy the book" name="link" required> <BR>
+      <button type="submit" class="button">Submit</button>
+      <button type="button" class="button" onclick="closeForm()">Close</button>
+   </form>
+</div>
+<script>
+   function openForm() {
+     document.getElementById("myForm").style.display = "block";
+   }
+
+   function closeForm() {
+     document.getElementById("myForm").style.display = "none";
+   }
+</script>
 <form action="/book-page">
-  <H2> Comments </H2>
-  <textarea id="comment" name="comment" rows="4" cols="80"></textarea>
-  <br><br>
-  <input type="submit" value="Submit">
+   <H2> Comments </H2>
+   <textarea id="comment" name="comment" rows="4" cols="80"></textarea>
+   <br><br>
+   <input type="submit" value="Submit">
 </form>
 {% endblock %}
