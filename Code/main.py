@@ -2,13 +2,14 @@ from urllib.parse import quote_plus
 from flask import Flask, redirect, url_for, render_template, request, g
 import sqlite3 as sql
 
+
+
 nextbook = Flask(__name__)
-database = "database/database.db"
 
 
 def get_db():
     if "db" not in g:
-        g.db = sql.connect(database)
+        g.db = sql.connect("database/database.db")
         g.db.row_factory = sql.Row
     return g.db
 
@@ -61,14 +62,44 @@ def add_book():
         return render_template("add-book.html")
 
 
-@nextbook.route("/book/<isbn>")
+@nextbook.route("/book/<isbn>", methods = ["GET", "POST"])
 def book_page(isbn):
+    count, total_score = 0, 0
+    for score in query_db("select * from review where isbn = ?", [isbn]):
+        count += 1
+        total_score += score["score"]
+
+    #temp fix to get
+    if (count!=0):
+        total_score = round(total_score/count,1)
+    count, total_score = 0, 0
+    if request.method== "POST":
+        in_price = request.form["price"]
+        in_link = request.form["link"]
+        #TODO interface with database then directly #return redirect(url_for("book_page", isbn = isbn))
+        # for now to show price and url changes\
+        return render_template("book-info.html",
+                                isbn = isbn,
+                               title = "Introduction to Algorithms",
+                              author = "Thomas H. Cormen",
+                           professor = "Peter Kemper",
+                              course = "CSCI 303, Algorithms",
+                              rating = total_score,
+                              price  = "$" + in_price,
+                              link = in_link)
+
     return render_template("book-info.html",
                                 isbn = isbn,
                                title = "Introduction to Algorithms",
                               author = "Thomas H. Cormen",
                            professor = "Peter Kemper",
-                              course = "CSCI 303, Algorithms")
+                              course = "CSCI 303, Algorithms",
+                               rating = total_score,
+                                price  = "$22.26",
+                                link = "https://www.abebooks.com/9780070131439/Introduction-Algorithms-Cormen-Thomas-Leiserson-0070131430/plp")
+
+
+
 
 
 @nextbook.route("/about")
