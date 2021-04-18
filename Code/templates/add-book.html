@@ -5,22 +5,53 @@
 {% block bar_add_book %}class="active"{% endblock %}
 
 {% block body %}
+
 <form action = "/add-book" method = "POST">
-  <div class = "center">
-    <h1> Add a book </h1>
-      <label for="title">Title:</label>
-      <input type="text" id="title" name="title"><br><br>
-      <label for="Author(s)">Authors:</label>
-      <input type="text" id="author" name="author"><br><br>
+  <div class = "add-book">
+    <label>Title</label>
+    <input type = "text" name = "title"\>
 
-      <label for="ISBN">ISBN:</label>
-      <input type="text" id="isbn" name="isbn"><br><br>
-      <label for="Professor">Professor (Optional):</label>
-      <input type="text" id="professor" name="professor"><br><br>
+    <label>Author(s)</label>
+    <input type = "text" name = "author"\>
 
-      <label for="Class">Class (Optional):</label>
-      <input type="text" id="course" name="course"><br><br>
-      <input type="submit" value="Submit">
+    <label>ISBN</label>
+    <input type = "text" name = "isbn"\>
+    
+    
+    <label>Professor (Optional)</label>
+    <input type = "text" name = "professor"\>
+
+    
+    <label>Class (Optional)</label>
+    <input type = "text" name = "class"\>
+
+    <input type="submit" value="Submit"\>
   </div>
 </form>
+
+
+
+<style type="text/css">
+    .add-book {
+      margin: 0 auto;
+      width: 210px;
+    }
+  
+    .add-book label{
+      display: inline-block;
+      text-align: right;
+      float: left;
+      margin: 10px;
+    }
+  
+    .add-book input{
+      display: inline-block;
+      text-align: left;
+      float: right;
+      padding: 10px;
+      margin: 10px;
+    }
+</style>
+
+
 {% endblock %}
