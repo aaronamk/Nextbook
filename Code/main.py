@@ -2,15 +2,15 @@ from urllib.parse import quote_plus
 from flask import Flask, redirect, url_for, render_template, request, g
 import sqlite3 as sql
 
-
-
 nextbook = Flask(__name__)
+
 
 def get_db():
     if 'db' not in g:
         g.db = sql.connect('database/database.db')
         g.db.row_factory = sql.Row
     return g.db
+
 
 def query_db(query, args=(), one=False):
     cur = get_db().execute(query, args)
@@ -64,11 +64,8 @@ def book_page(isbn):
     for score in query_db('select * from review where isbn = ?', [isbn]):
         count += 1
         total_score += score['score']
-
-    #temp fix to get 
     if (count!=0):
         total_score = round(total_score/count,1)
-    count, total_score = 0, 0
     if request.method== "POST":
         in_price = request.form["price"]
         in_link = request.form["link"]
@@ -95,13 +92,16 @@ def book_page(isbn):
                                 link = "https://www.abebooks.com/9780070131439/Introduction-Algorithms-Cormen-Thomas-Leiserson-0070131430/plp")
 
 
-
-
-
 @nextbook.route("/about")
 def about():
     return render_template("about.html")
 
+
+@nextbook.teardown_appcontext
+def teardown_db(exception):
+    db = g.pop('db', None)
+    if db is not None:
+        db.close()
 
 
 if __name__ == "__main__":
