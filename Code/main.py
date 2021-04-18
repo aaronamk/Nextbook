@@ -59,7 +59,7 @@ def book_page(isbn):
                               author = "Thomas H. Cormen",
                            professor = "Peter Kemper",
                               course = "CSCI 303, Algorithms",
-                              price  = in_price,
+                              price  = "$" + in_price,
                               link = in_link)
 
     else:
