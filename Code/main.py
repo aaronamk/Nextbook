@@ -6,8 +6,8 @@ nextbook = Flask(__name__)
 
 
 def get_db():
-    if 'db' not in g:
-        g.db = sql.connect('database/database.db')
+    if "db" not in g:
+        g.db = sql.connect("database/database.db")
         g.db.row_factory = sql.Row
     return g.db
 
@@ -19,7 +19,7 @@ def query_db(query, args=(), one=False):
     return (rv[0] if rv else None) if one else rv
 
 
-@nextbook.route("/", methods = ['GET', 'POST'])
+@nextbook.route("/", methods = ["GET", "POST"])
 def search():
     if request.method == "POST":
         phrase = quote_plus(request.form["phrase"])
@@ -34,7 +34,9 @@ def search():
 
 @nextbook.route("/search")
 def results():
-    return " | ".join(f"{k}: {v}" for k, v in request.args.items())
+    print(query_db("select * from textbook"))
+
+    return render_template("results.html")
 
 
 @nextbook.route("/class-list")
@@ -42,7 +44,7 @@ def course_list():
     return render_template("major-directory.html")
 
 
-@nextbook.route("/add-book", methods = ['GET', 'POST'])
+@nextbook.route("/add-book", methods = ["GET", "POST"])
 def add_book():
     if request.method == "POST":
         in_isbn = request.form["isbn"]
@@ -58,12 +60,12 @@ def add_book():
         return render_template("add-book.html")
 
 
-@nextbook.route("/book/<isbn>", methods = ['GET', 'POST'])
+@nextbook.route("/book/<isbn>", methods = ["GET", "POST"])
 def book_page(isbn):
     count, total_score = 0, 0
-    for score in query_db('select * from review where isbn = ?', [isbn]):
+    for score in query_db("select * from review where isbn = ?", [isbn]):
         count += 1
-        total_score += score['score']
+        total_score += score["score"]
     if (count!=0):
         total_score = round(total_score/count,1)
     if request.method== "POST":
@@ -99,7 +101,7 @@ def about():
 
 @nextbook.teardown_appcontext
 def teardown_db(exception):
-    db = g.pop('db', None)
+    db = g.pop("db", None)
     if db is not None:
         db.close()
 
