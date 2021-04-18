@@ -3,11 +3,10 @@ from flask import Flask, redirect, url_for, render_template, request, g
 import sqlite3 as sql
 
 nextbook = Flask(__name__)
-database = '/database/database.db'
 
 def get_db():
     if 'db' not in g:
-        g.db = sql.connect(database)
+        g.db = sql.connect('database/database.db')
         g.db.row_factory = sql.Row
     return g.db
 
@@ -57,12 +56,18 @@ def add_book():
 
 @nextbook.route("/book/<isbn>")
 def book_page(isbn):
+    count, total_score = 0, 0
+    for score in query_db('select * from review where isbn = ?', [isbn]):
+        count += 1
+        total_score += score['score']
+    total_score = round(total_score/count,1)
     return render_template("book-info.html",
                                 isbn = isbn,
                                title = "Introduction to Algorithms",
                               author = "Thomas H. Cormen",
                            professor = "Peter Kemper",
-                              course = "CSCI 303, Algorithms")
+                              course = "CSCI 303, Algorithms",
+                              rating = total_score)
 
 
 @nextbook.route("/about")
