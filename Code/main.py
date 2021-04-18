@@ -34,7 +34,9 @@ def search():
 
 @nextbook.route("/search")
 def results():
-    print(query_db("select * from textbook"))
+    # print all the textbooks cause it's cool
+    for row in query_db("SELECT * FROM textbook"):
+        print(row[0],row[1],row[2])
 
     return render_template("results.html")
 
@@ -47,13 +49,13 @@ def course_list():
 @nextbook.route("/add-book", methods = ["GET", "POST"])
 def add_book():
     if request.method == "POST":
-        in_isbn = request.form["isbn"]
+        in_isbn = int(request.form["isbn"])
         in_title = request.form["title"]
         in_author = request.form["author"]
         in_professor = request.form["professor"]
         in_course = request.form["course"]
 
-        # TODO: interface with the database here to add the book
+        query_db(f"INSERT INTO textbook (isbn, title, author) VALUES ('{in_isbn}','{in_title}','{in_author}');")
 
         return redirect(url_for("book_page", isbn = in_isbn))
     else:

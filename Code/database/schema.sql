@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS textbook_comment;
 
 CREATE TABLE textbook (
   isbn INTEGER PRIMARY KEY NOT NULL,
-  name TEXT NOT NULL,
+  title TEXT NOT NULL,
   author TEXT NOT NULL
 );
 
