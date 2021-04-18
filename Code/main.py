@@ -47,13 +47,20 @@ def course_list():
 @nextbook.route("/add-book", methods = ["GET", "POST"])
 def add_book():
     if request.method == "POST":
-        in_isbn = request.form["isbn"]
+        in_isbn = int(request.form["isbn"])
         in_title = request.form["title"]
         in_author = request.form["author"]
         in_professor = request.form["professor"]
         in_course = request.form["course"]
 
         # TODO: interface with the database here to add the book
+        conn = sql.connect("database/database.db")
+        print ("Opened database successfully")
+        with open("database/schema.sql", mode="r") as f:
+            conn.cursor().executescript(f.read())
+        conn.cursor().executescript(f"INSERT INTO textbook (isbn, title, author) VALUES ('{in_isbn}','{in_title}','{in_author}');")
+        conn.commit()
+        conn.close()
 
         return redirect(url_for("book_page", isbn = in_isbn))
     else:
