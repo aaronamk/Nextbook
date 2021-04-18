@@ -9,5 +9,5 @@ print ("Created tables succesfully")
 conn.close()
 
 #This file is for creating/updating the database schema
-#Uses the schema.sql file under the databse folder to update the database.db file
+#Uses the schema.sql file under the database folder to update the database.db file
 #This WILL clear the database
