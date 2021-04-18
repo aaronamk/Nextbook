@@ -2,6 +2,7 @@
 {% block title %}{{ title }}{% endblock %}
 {% block body %}
 <style>
+  /* Both Box splithelps organize the elements*/
    .boxSplit {
    float: left;
    width: 33.33%;
@@ -12,10 +13,10 @@
    clear: both;
    display: table;
    }
+
+   /* form popup to edit price */
   .form-popup {
     display: none;
-
-    border: 3px solid #f1f1f1;
     z-index: 9;
   }
 
@@ -23,23 +24,19 @@
   .form-container {
     max-width: 300px;
     padding: 10px;
-    background-color: white;
+    background-color: black;
   }
 
   /* Full-width input fields */
-  .form-container input[type=text], .form-container input[type=password] {
-    width: 100%;
+  .form-container input[type=text], .form-container input[type=text] {
+    width: 80%;
     padding: 15px;
-    margin: 5px 0 22px 0;
+    margin: 5px 0 15px 0;
     border: none;
-    background: #f1f1f1;
+    background: white;
   }
 
-  /* When the inputs get focus, do something */
-  .form-container input[type=text]:focus, .form-container input[type=text]:focus {
-    background-color: #ddd;
-    outline: none;
-}
+
 </style>
 <div class = "center">
 <h1>{{ title }}</h1>
@@ -56,12 +53,12 @@
    <div class= "boxSplit">
       <h1> Where to Buy </h1>
       <p> Lowest Price:  {{price}} <BR>     </p>
-      <a href="https://www.abebooks.com/9780070131439/Introduction-Algorithms-Cormen-Thomas-Leiserson-0070131430/plp" class="button">Buy Now</a>
+      <a href={{ link }} class="button">Buy Now</a>
       <button class="button" onclick="openForm()">Change Price</button>
    </div>
 </div>
 <div class="form-popup" id="myForm">
-   <form action="/action_page.php" class="form-container">
+   <form action="/book/{{ isbn }}" method = "POST" class="form-container">
       <h1>Change Price</h1>
       <p> If you found a better price please let us know, so that everyone will be able to find the cheapest textbook</p>
       <BR<
