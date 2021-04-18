@@ -27,6 +27,14 @@
     background-color: black;
   }
 
+  <img src="{{ url_for('static', filename='Algorithms.jpg') }}" /> <br>
+  <div class = "box">
+    Author: {{ author }}<BR>
+    ISBN: {{ isbn }}<BR>
+    Course: {{ course }}<BR>
+    Professors: {{ professor }}<BR>
+    Utility Rating: {{ rating }}<BR>
+  </div>
   /* Full-width input fields */
   .form-container input[type=text], .form-container input[type=text] {
     width: 80%;
@@ -49,6 +57,8 @@
       ISBN: {{ isbn }}<BR>
       Course: {{ course }}<BR>
       Professors: {{ professor }}<BR>
+      Utility Rating: {{ rating }}<BR>
+
    </div>
    <div class= "boxSplit">
       <h1> Where to Buy </h1>
@@ -63,9 +73,9 @@
       <p> If you found a better price please let us know, so that everyone will be able to find the cheapest textbook</p>
       <BR<
       <label for="price"><b>Price</b></label>
-      <input type="text" placeholder="Enter price in $" name="price" required>
+      <input type="text" placeholder="Enter price in $" name="price" required><BR>
       <label for="link"><b>Link</b></label>
-      <input type="text" placeholder="Enter the url to buy the book" name="link" required>
+      <input type="text" placeholder="Enter the url to buy the book" name="link" required> <BR>
       <button type="submit" class="button">Submit</button>
       <button type="button" class="button" onclick="closeForm()">Close</button>
    </form>
