@@ -34,7 +34,9 @@ def search():
 
 @nextbook.route("/search")
 def results():
-    print(query_db("select * from textbook"))
+    # print all the textbooks cause it's cool
+    for row in query_db("SELECT * FROM textbook"):
+        print(row[0],row[1],row[2])
 
     return render_template("results.html")
 
@@ -53,14 +55,7 @@ def add_book():
         in_professor = request.form["professor"]
         in_course = request.form["course"]
 
-        # TODO: interface with the database here to add the book
-        conn = sql.connect("database/database.db")
-        print ("Opened database successfully")
-        with open("database/schema.sql", mode="r") as f:
-            conn.cursor().executescript(f.read())
-        conn.cursor().executescript(f"INSERT INTO textbook (isbn, title, author) VALUES ('{in_isbn}','{in_title}','{in_author}');")
-        conn.commit()
-        conn.close()
+        query_db(f"INSERT INTO textbook (isbn, title, author) VALUES ('{in_isbn}','{in_title}','{in_author}');")
 
         return redirect(url_for("book_page", isbn = in_isbn))
     else:
