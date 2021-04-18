@@ -36,7 +36,7 @@ def search():
 
 @nextbook.route("/search")
 def results():
-    print(query_db(""))
+    print(query_db("select * from textbook"))
 
     return render_template("results.html")
 
@@ -105,13 +105,6 @@ def book_page(isbn):
 @nextbook.route("/about")
 def about():
     return render_template("about.html")
-
-
-@nextbook.teardown_appcontext
-def close_connection(exception):
-    db = g.pop("db", None)
-    if db is not None:
-        db.close()
 
 
 if __name__ == "__main__":
