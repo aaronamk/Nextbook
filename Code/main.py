@@ -14,6 +14,7 @@ def get_db():
 
 def query_db(query, args=(), one=False):
     cur = get_db().execute(query, args)
+    g.db.commit()
     rv = cur.fetchall()
     cur.close()
     return (rv[0] if rv else None) if one else rv
@@ -34,6 +35,9 @@ def search():
 
 @nextbook.route("/search")
 def results():
+    if request.args["filter"] == "isbn":
+        return redirect(url_for("book_page", isbn = request.args["q"]))
+
     # print all the textbooks cause it's cool
     for row in query_db("SELECT * FROM textbook"):
         print(row[0],row[1],row[2])
