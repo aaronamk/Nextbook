@@ -11,5 +11,4 @@ test_app:
     - source env/bin/activate
     script:
       pip install Flask
-      #python main.py
       python Cod/test.py
