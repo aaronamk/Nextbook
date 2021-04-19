@@ -1,0 +1,69 @@
+{% extends "top-bar.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+<style>
+  /* Both Box splithelps organize the elements*/
+   .boxSplit {
+   float: left;
+   width: 33.33%;
+   padding: 80px;
+   }
+   .clearfix::after {
+   content: "";
+   clear: both;
+   display: table;
+   }
+
+   /* form popup to edit price */
+  .form-popup {
+    display: none;
+    z-index: 9;
+  }
+
+  /* Add styles to the form container */
+  .form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: black;
+  }
+  <div class = "box">
+    Course: {{ course }}<BR>
+    Professor: {{ professor }}<BR>
+  </div>
+  /* Full-width input fields */
+  .form-container input[type=text], .form-container input[type=text] {
+    width: 80%;
+    padding: 15px;
+    margin: 5px 0 15px 0;
+    border: none;
+    background: white;
+  }
+
+
+</style>
+<div class = "center">
+<h1>{{ title }}</h1>
+<div class = "clearfix">
+   <div class = "boxSplit" style = "background-color: bg3">
+      Course: {{ course }}<BR>
+      Professor: {{ professor }}<BR>
+      
+   </div>
+</div>
+
+<script>
+   function openForm() {
+     document.getElementById("myForm").style.display = "block";
+   }
+
+   function closeForm() {
+     document.getElementById("myForm").style.display = "none";
+   }
+</script>
+<form action="/book-page">
+   <H2> Comments </H2>
+   <textarea id="comment" name="comment" rows="4" cols="80"></textarea>
+   <br><br>
+   <input type="submit" value="Submit">
+</form>
+{% endblock %}
