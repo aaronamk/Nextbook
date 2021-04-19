@@ -37,6 +37,8 @@ def search():
 def results():
     if request.args["filter"] == "isbn":
         return redirect(url_for("book_page", isbn = request.args["q"]))
+    if request.args["filter"] == "class":
+        return render_template("class-page.html")
 
     # print all the textbooks cause it's cool
     for row in query_db("SELECT * FROM textbook"):
