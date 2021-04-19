@@ -5,10 +5,10 @@ test_app:
   image: python:latest
   stage: test
   before_script:
-    - python -V
-    - pip install virtualenv
-    - virtualenv env
-    - source env/bin/activate
-    script:
-      pip install Flask
-      python Cod/test.py
+  - python -V
+  - pip install virtualenv
+  - virtualenv env
+  - source env/bin/activate
+  script:
+  - pip install Flask
+  - python Cod/test.py
