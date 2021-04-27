@@ -49,6 +49,7 @@ def results():
 def course_list():
     return render_template("major-directory.html")
 
+    return redirect(url_for("book_page", isbn))
 
 @nextbook.route("/add-book", methods = ["GET", "POST"])
 def add_book():
@@ -60,15 +61,22 @@ def add_book():
         in_course = request.form["course"]
 
         query_db(f"INSERT INTO textbook (isbn, title, author) VALUES ('{in_isbn}','{in_title}','{in_author}');")
-
         return redirect(url_for("book_page", isbn = in_isbn))
     else:
         return render_template("add-book.html")
 
 
+def get_comments(isbn):
+    comments = []
+    for i in query_db("select * from textbook_comment where user = ?", [isbn]):
+        print(i[3])
+        comments.append(i[3])
+    return comments
+
 @nextbook.route("/book/<isbn>", methods = ["GET", "POST"])
 def book_page(isbn):
     count, total_score = 0, 0
+    cur_comments = get_comments(isbn)
     for score in query_db("select * from review where isbn = ?", [isbn]):
         count += 1
         total_score += score["score"]
@@ -87,7 +95,8 @@ def book_page(isbn):
                               course = "CSCI 303, Algorithms",
                               rating = total_score,
                               price  = "$" + in_price,
-                              link = in_link)
+                              link = in_link,
+                              comment= cur_comments)
 
     return render_template("book-info.html",
                                 isbn = isbn,
@@ -97,12 +106,25 @@ def book_page(isbn):
                               course = "CSCI 303, Algorithms",
                                rating = total_score,
                                 price  = "$22.26",
+                                comments= cur_comments,
                                 link = "https://www.abebooks.com/9780070131439/Introduction-Algorithms-Cormen-Thomas-Leiserson-0070131430/plp")
 
 
 @nextbook.route("/about")
 def about():
     return render_template("about.html")
+
+@nextbook.route("/submit_comment", methods =["POST"])
+def submit_comment():
+    isbn = int(request.form.get("isbn"))
+    comment = request.form.get("comment")
+    query_db(f"INSERT INTO  textbook_comment (user, body) VALUES ('{isbn}','{comment}');")
+
+    return redirect(url_for("book_page", isbn = isbn))
+
+
+    # TODO insert into database
+
 
 
 @nextbook.teardown_appcontext
