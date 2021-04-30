@@ -89,10 +89,17 @@
      document.getElementById("myForm").style.display = "none";
    }
 </script>
-<form action="/book-page">
+<form action="/submit_comment" method="POST">
    <H2> Comments </H2>
    <textarea id="comment" name="comment" rows="4" cols="80"></textarea>
    <br><br>
+   <input type="hidden" value= {{ isbn }} name= "isbn">
    <input type="submit" value="Submit">
 </form>
+{% for comment in comments %}
+<div class = "comment_box">
+  {{ comment }}
+</div>
+{% endfor %}
+
 {% endblock %}
