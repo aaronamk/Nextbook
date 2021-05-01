@@ -68,9 +68,10 @@ def add_book():
 
 def get_comments(isbn):
     comments = []
-    for i in query_db("select * from textbook_comment where user = ?", [isbn]):
-        print(i[3])
-        comments.append(i[3])
+    for i in query_db("select * from textbook_comment where isbn = ?", [isbn]):
+        #print(i[0],i[1],i[2],i[3], i[4])
+        # 0-id, 1 - Username, 2- isbn, 3- Timestamp, 4- Comment
+        comments.append([i[1],i[3],i[4]])
     return comments
 
 @nextbook.route("/book/<isbn>", methods = ["GET", "POST"])
@@ -117,8 +118,11 @@ def about():
 @nextbook.route("/submit_comment", methods =["POST"])
 def submit_comment():
     isbn = int(request.form.get("isbn"))
+    user = request.form.get("user")
+    if (not user or user.isspace()):
+        user = "Unknown"
     comment = request.form.get("comment")
-    query_db(f"INSERT INTO  textbook_comment (user, body) VALUES ('{isbn}','{comment}');")
+    query_db(f"INSERT INTO textbook_comment (isbn, user, body) VALUES ('{isbn}','{user}','{comment}');")
 
     return redirect(url_for("book_page", isbn = isbn))
 
