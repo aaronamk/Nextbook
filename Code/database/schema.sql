@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS textbook_comment;
 CREATE TABLE course (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT NOT NULL,
-  professor TEXT NOT NULL
+  professor TEXT NOT NULL,
   wiki TEXT NOT NULL
 );
 
