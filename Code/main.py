@@ -73,7 +73,7 @@ def review():
     return render_template("review-book.html")
 
 @nextbook.route("/add-book", methods = ["GET", "POST"])
-def add_book():
+def add_book(isbn = ""):
     if request.method == "POST":
         in_isbn = int(request.form["isbn"])
         in_title = request.form["title"]
@@ -81,10 +81,13 @@ def add_book():
         in_professor = request.form["professor"]
         in_course = request.form["course"]
 
-        query_db(f"INSERT INTO textbook (isbn, title, author) VALUES ('{in_isbn}','{in_title}','{in_author}');")
-        return redirect(url_for("book_page", isbn = in_isbn))
+        try:
+            query_db(f"INSERT INTO textbook (isbn, title, author) VALUES ('{in_isbn}','{in_title}','{in_author}');")
+            return redirect(url_for("book_page", isbn = in_isbn))
+        except:
+            return redirect(url_for("book_page", isbn = in_isbn))
     else:
-        return render_template("add-book.html")
+        return render_template("add-book.html", isbn = isbn)
 
 
 def get_comments(isbn):
@@ -98,6 +101,14 @@ def get_comments(isbn):
 
 @nextbook.route("/book/<isbn>", methods = ["GET", "POST"])
 def book_page(isbn):
+    in_title = "Introduction to Algorithms"
+    in_author = "Thomas H Cormen"
+    # default titles and authors to
+
+    # if no book with this isbn exists, go to add a book page
+    if len(query_db(f"SELECT * FROM textbook WHERE isbn = '{ isbn }'")) == 0:
+        return render_template("add-book.html", isbn = isbn)
+
     count, total_score = 0, 0
     cur_comments = get_comments(isbn)
     for score in query_db("select * from review where isbn = ?", [isbn]):
@@ -105,6 +116,17 @@ def book_page(isbn):
         total_score += score["score"]
     if (count!=0):
         total_score = round(total_score/count,1)
+    for info in query_db("select * from textbook where isbn = ?", [isbn]):
+        in_author=info[2]
+        in_title=info[1]
+
+    image_file = "default_book_cover.jpg"
+    if (isbn=="9780262033848"): # isbn for Algorithms textbook so image displays on screen
+        image_file = "Algorithms.jpg"
+    elif (isbn == "1118290275"):
+        image_file = "data_structs.jpg"
+    image = "\static\\" + image_file
+
     if request.method== "POST":
         in_price = request.form["price"]
         in_link = request.form["link"]
@@ -112,31 +134,36 @@ def book_page(isbn):
         # for now to show price and url changes\
         return render_template("book-info.html",
                                 isbn = isbn,
-                               title = "Introduction to Algorithms",
-                              author = "Thomas H. Cormen",
+                               title = in_title,
+                              author = in_author,
                            professor = "Peter Kemper",
                               course = "CSCI 303, Algorithms",
                               rating = total_score,
                               price  = "$" + in_price,
                                 link = in_link,
-                              comment= cur_comments)
+                              comment= cur_comments,
+                              image = image)
 
     return render_template("book-info.html",
                                 isbn = isbn,
-                               title = "Introduction to Algorithms",
-                              author = "Thomas H. Cormen",
+                               title = in_title,
+                              author = in_author,
                            professor = "Peter Kemper",
                               course = "CSCI 303, Algorithms",
                               rating = total_score,
                               price  = "$22.26",
                             comments = cur_comments,
-                                link = "https://www.abebooks.com/9780070131439/Introduction-Algorithms-Cormen-Thomas-Leiserson-0070131430/plp")
+                                link = "https://www.abebooks.com/9780070131439/Introduction-Algorithms-Cormen-Thomas-Leiserson-0070131430/plp",
+                                image = image)
 
 
 @nextbook.route("/about")
 def about():
     return render_template("about.html")
 
+@nextbook.route("/csci")
+def csci_page():
+    return render_template("com-sci-classes.html")
 
 @nextbook.route("/submit_comment", methods =["POST"])
 def submit_comment():
