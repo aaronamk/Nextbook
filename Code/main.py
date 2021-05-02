@@ -37,8 +37,6 @@ def search():
 def results():
     if request.args["filter"] == "isbn":
         return redirect(url_for("book_page", isbn = request.args["q"]))
-    if request.args["filter"] == "class":
-        return render_template("class-page.html")
 
     # print all the textbooks cause it's cool
     for row in query_db("SELECT * FROM textbook"):
@@ -52,6 +50,10 @@ def course_list():
     return render_template("major-directory.html")
 
     return redirect(url_for("book_page", isbn))
+
+@nextbook.route("/review-book")
+def review():
+    return render_template("review-book.html")
 
 @nextbook.route("/add-book", methods = ["GET", "POST"])
 def add_book():
