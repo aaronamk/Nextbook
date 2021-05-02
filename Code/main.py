@@ -60,7 +60,7 @@ def review():
     return render_template("review-book.html")
 
 @nextbook.route("/add-book", methods = ["GET", "POST"])
-def add_book():
+def add_book(isbn = ""):
     if request.method == "POST":
         in_isbn = int(request.form["isbn"])
         in_title = request.form["title"]
@@ -71,7 +71,7 @@ def add_book():
         query_db(f"INSERT INTO textbook (isbn, title, author) VALUES ('{in_isbn}','{in_title}','{in_author}');")
         return redirect(url_for("book_page", isbn = in_isbn))
     else:
-        return render_template("add-book.html")
+        return render_template("add-book.html", isbn = isbn)
 
 
 def get_comments(isbn):
@@ -85,6 +85,10 @@ def get_comments(isbn):
 
 @nextbook.route("/book/<isbn>", methods = ["GET", "POST"])
 def book_page(isbn):
+    # if no book with this isbn exists, go to add a book page
+    if len(query_db(f"SELECT * FROM textbook WHERE isbn = '{ isbn }'")) == 0:
+        return render_template("add-book.html", isbn = isbn)
+
     count, total_score = 0, 0
     cur_comments = get_comments(isbn)
     for score in query_db("select * from review where isbn = ?", [isbn]):
