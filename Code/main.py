@@ -96,6 +96,8 @@ def book_page(isbn):
         image_file = "Algorithms.jpg"
     elif (isbn == "1118290275"):
         image_file = "data_structs.jpg"
+        in_title = "Data Structures & Algorithms in Python"
+        in_author = "Michael T. Goodrich"
     image = "\static\\" + image_file
     if request.method== "POST":
         in_price = request.form["price"]
