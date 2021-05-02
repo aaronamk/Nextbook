@@ -1,0 +1,27 @@
+{% extends "top-bar.html" %}
+
+{% block title %}Major Directory{% endblock %}
+
+{% block bar_full_list %}class="active"{% endblock %}
+
+{% block body %}
+<style>
+  .col {
+    float:left;
+    width:50%;
+  }
+  .wrap:after {
+    content:"";
+    display:table;
+    clear: both;
+  }
+</style>
+<div class="center">
+  <h1>Computer Science Classes and Textbooks</h1>
+  <div class="wrap">
+    <h3>CSCI 303 Algorithms</h3>
+      <a class="link" href = "/book/9780262033848" style="outline:none;">Introduction to Algorithms 3rd Edition</a><br>
+      <h3>CSCI 241 Data Structures</h3>
+        <a class="link" href = "/book/1118290275" style="outline:none;">Data Structures and Algorithms in Python</a><br>
+
+{% endblock %}
