@@ -2,6 +2,7 @@ from urllib.parse import quote_plus
 from flask import Flask, redirect, url_for, render_template, request, g
 import sqlite3 as sql
 
+
 nextbook = Flask(__name__)
 
 
@@ -37,12 +38,15 @@ def search():
 def results():
     if request.args["filter"] == "isbn":
         return redirect(url_for("book_page", isbn = request.args["q"]))
+    if request.args["filter"] == "professor": # not yet supported
+        return render_template("results.html", results="")
+    if request.args["filter"] == "class": # not yet supported
+        return render_template("results.html", results="")
 
-    # print all the textbooks cause it's cool
-    for row in query_db("SELECT * FROM textbook"):
-        print(row[0],row[1],row[2])
+    # covers all other search filters
+    results = query_db(f"SELECT * FROM textbook WHERE { request.args['filter'] } LIKE '%{ request.args['q'] }%'")
 
-    return render_template("results.html")
+    return render_template("results.html", results=results)
 
 
 @nextbook.route("/class-list")
@@ -63,12 +67,9 @@ def add_book():
         in_author = request.form["author"]
         in_professor = request.form["professor"]
         in_course = request.form["course"]
-        try:
-            query_db(f"INSERT INTO textbook (isbn, title, author) VALUES ('{in_isbn}','{in_title}','{in_author}');")
-            return redirect(url_for("book_page", isbn = in_isbn))
-        except:
-            return redirect(url_for("book_page", isbn = in_isbn))
 
+        query_db(f"INSERT INTO textbook (isbn, title, author) VALUES ('{in_isbn}','{in_title}','{in_author}');")
+        return redirect(url_for("book_page", isbn = in_isbn))
     else:
         return render_template("add-book.html")
 
@@ -81,10 +82,9 @@ def get_comments(isbn):
         comments.append([i[1],i[3],i[4]])
     return comments
 
+
 @nextbook.route("/book/<isbn>", methods = ["GET", "POST"])
 def book_page(isbn):
-    in_title = "Introduction to Algorithms"
-    in_author = "Thomas H Cormen"
     count, total_score = 0, 0
     cur_comments = get_comments(isbn)
     for score in query_db("select * from review where isbn = ?", [isbn]):
@@ -92,17 +92,6 @@ def book_page(isbn):
         total_score += score["score"]
     if (count!=0):
         total_score = round(total_score/count,1)
-    for info in query_db("select * from textbook where isbn = ?", [isbn]):
-        in_author=info[2]
-        in_title=info[1]
-    image_file = "default_book_cover.jpg"
-    if (isbn=="9780262033848"): # isbn for Algorithms textbook so image displays on screen
-        image_file = "Algorithms.jpg"
-    elif (isbn == "1118290275"):
-        image_file = "data_structs.jpg"
-        in_title = "Data Structures & Algorithms in Python"
-        in_author = "Michael T. Goodrich"
-    image = "\static\\" + image_file
     if request.method== "POST":
         in_price = request.form["price"]
         in_link = request.form["link"]
@@ -110,32 +99,31 @@ def book_page(isbn):
         # for now to show price and url changes\
         return render_template("book-info.html",
                                 isbn = isbn,
-                               title = in_title,
-                              author = in_author,
+                               title = "Introduction to Algorithms",
+                              author = "Thomas H. Cormen",
                            professor = "Peter Kemper",
-                              #course = "CSCI 303, Algorithms",
+                              course = "CSCI 303, Algorithms",
                               rating = total_score,
                               price  = "$" + in_price,
-                              link = in_link,
-                              comment= cur_comments,
-                              image = image)
+                                link = in_link,
+                              comment= cur_comments)
 
     return render_template("book-info.html",
                                 isbn = isbn,
-                               title = in_title,
-                              author = in_author,
+                               title = "Introduction to Algorithms",
+                              author = "Thomas H. Cormen",
                            professor = "Peter Kemper",
-                             # course = "CSCI 303, Algorithms",
-                               rating = total_score,
-                                price  = "$22.26",
-                                comments= cur_comments,
-                                link = "https://www.abebooks.com/9780070131439/Introduction-Algorithms-Cormen-Thomas-Leiserson-0070131430/plp",
-                                image = image)
+                              course = "CSCI 303, Algorithms",
+                              rating = total_score,
+                              price  = "$22.26",
+                            comments = cur_comments,
+                                link = "https://www.abebooks.com/9780070131439/Introduction-Algorithms-Cormen-Thomas-Leiserson-0070131430/plp")
 
 
 @nextbook.route("/about")
 def about():
     return render_template("about.html")
+
 
 @nextbook.route("/submit_comment", methods =["POST"])
 def submit_comment():
@@ -151,10 +139,8 @@ def submit_comment():
     return redirect(url_for("book_page", isbn = isbn))
 
 
-    # TODO insert into database
-@nextbook.route("/csci")
-def csci_page():
-    return render_template("com-sci-classes.html")
+# TODO: insert into database
+
 
 
 @nextbook.teardown_appcontext
