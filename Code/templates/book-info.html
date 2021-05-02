@@ -27,11 +27,11 @@
     background-color: black;
   }
 
-  <img src="{{ url_for('static', filename='Algorithms.jpg') }}" /> <br>
+  <img src="{{ url_for('static', filename=", {{ image }}, ") }}" /> <br>
   <div class = "box">
     Author: {{ author }}<BR>
     ISBN: {{ isbn }}<BR>
-    Course: {{ course }}<BR>
+    /*Course: {{ course }}<BR>*/
     Professors: {{ professor }}<BR>
     Utility Rating: {{ rating }}<BR>
   </div>
@@ -50,12 +50,11 @@
 <h1>{{ title }}</h1>
 <div class = "clearfix">
    <div class="boxSplit">
-      <img src="{{ url_for('static', filename='Algorithms.jpg') }}" /> <br>
+      <img src= {{ image }} /> <br>
    </div>
    <div class = "boxSplit" style = "background-color: bg3">
       Author: {{ author }}<BR>
       ISBN: {{ isbn }}<BR>
-      Course: {{ course }}<BR>
       Professors: {{ professor }}<BR>
       Utility Rating: {{ rating }}<BR>
 
@@ -91,14 +90,27 @@
 </script>
 <form action="/submit_comment" method="POST">
    <H2> Comments </H2>
-   <textarea id="comment" name="comment" rows="4" cols="80"></textarea>
+   <textarea id="user" name="user" style="resize: none;" placeholder="Name" rows="1" cols="80"></textarea>
+   <br><br>
+   <label for="rating">Utility Rating:</label>
+   <select id="rating" name="rating">
+      <option value="5">5</option>
+      <option value="4">4</option>
+      <option value="3">3</option>
+      <option value="2">2</option>
+      <option value="1">1</option>
+   </select>
+   <br><br>
+   <textarea id="comment" name="comment" style="resize: none;" placeholder="Type comment here..." rows="4" cols="80"></textarea>
    <br><br>
    <input type="hidden" value= {{ isbn }} name= "isbn">
-   <input type="submit" value="Submit">
+   <input type="submit" value="Post">
+   <br><br>
 </form>
 {% for comment in comments %}
 <div class = "comment_box">
-  {{ comment }}
+  <div>{{ comment[0] }} - {{comment[1]}}</div>
+  <div>{{ comment[2] }}</div>
 </div>
 {% endfor %}
 
