@@ -51,6 +51,10 @@ def course_list():
 
     return redirect(url_for("book_page", isbn))
 
+@nextbook.route("/review-book")
+def review():
+    return render_template("review-book.html")
+
 @nextbook.route("/add-book", methods = ["GET", "POST"])
 def add_book():
     if request.method == "POST":
