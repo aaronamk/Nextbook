@@ -8,13 +8,23 @@
     <label for="filter">Search by</label>
     <select name="filter" id="filter">
       <option value="title">Title</option>
-      <option value="isbn">ISBN</option>
+      <option value="author">Author</option>
       <option value="class">Class</option>
       <option value="professor">Professor</option>
+      <option value="isbn">ISBN</option>
     </select>
     <input type="text" name="phrase" value="{{ request.args["q"] }}"/>
     <button type="submit"/>go</button>
   </p>
+
+  {% for result in results%}
+    <p>
+      <a class="link" href = "/book/{{ result[0] }}" style="outline:none;">{{ result[1] }}</a>
+      - {{ result[2] }}
+    </p>
+  {% else %}
+  <p>No books found</p>
+  {% endfor %}
   <div class="center">
   </div>
 </form>
