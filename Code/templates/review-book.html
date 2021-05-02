@@ -1,0 +1,57 @@
+{% extends "top-bar.html" %}
+
+{% block title %}Add Book{% endblock %}
+
+{% block bar_add_book %}class="active"{% endblock %}
+
+{% block body %}
+
+<form action = "/add-book" method = "POST">
+  <div class = "add-book">
+    <label>Title</label>
+    <input type = "text" name = "title"\>
+
+    <label>Author(s)</label>
+    <input type = "text" name = "author"\>
+
+    <label>ISBN</label>
+    <input type = "text" name = "isbn"\>
+
+
+    <label>Professor (Optional)</label>
+    <input type = "text" name = "professor"\>
+
+
+    <label>Class (Optional)</label>
+    <input type = "text" name = "course"\>
+
+    <input type="submit" value="Submit"\>
+  </div>
+</form>
+
+
+
+<style type="text/css">
+    .add-book {
+      margin: 0 auto;
+      width: 210px;
+    }
+
+    .add-book label{
+      display: inline-block;
+      text-align: right;
+      float: left;
+      margin: 10px;
+    }
+
+    .add-book input{
+      display: inline-block;
+      text-align: left;
+      float: right;
+      padding: 10px;
+      margin: 10px;
+    }
+</style>
+
+
+{% endblock %}
