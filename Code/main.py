@@ -136,11 +136,13 @@ def about():
 @nextbook.route("/submit_comment", methods =["POST"])
 def submit_comment():
     isbn = int(request.form.get("isbn"))
+    rating = int(request.form.get("rating"))
     user = request.form.get("user")
     if (not user or user.isspace()):
         user = "Unknown"
     comment = request.form.get("comment")
     query_db(f"INSERT INTO textbook_comment (isbn, user, body) VALUES ('{isbn}','{user}','{comment}');")
+    query_db(f"INSERT INTO review (isbn, score) VALUES ('{isbn}','{rating}');")
 
     return redirect(url_for("book_page", isbn = isbn))
 

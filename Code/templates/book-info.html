@@ -92,10 +92,20 @@
    <H2> Comments </H2>
    <textarea id="user" name="user" style="resize: none;" placeholder="Name" rows="1" cols="80"></textarea>
    <br><br>
+   <label for="rating">Utility Rating:</label>
+   <select id="rating" name="rating">
+      <option value="5">5</option>
+      <option value="4">4</option>
+      <option value="3">3</option>
+      <option value="2">2</option>
+      <option value="1">1</option>
+   </select>
+   <br><br>
    <textarea id="comment" name="comment" style="resize: none;" placeholder="Type comment here..." rows="4" cols="80"></textarea>
    <br><br>
    <input type="hidden" value= {{ isbn }} name= "isbn">
    <input type="submit" value="Post">
+   <br><br>
 </form>
 {% for comment in comments %}
 <div class = "comment_box">
