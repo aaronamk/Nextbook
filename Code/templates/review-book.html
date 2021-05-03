@@ -1,50 +1,52 @@
 {% extends "top-bar.html" %}
 
-{% block title %}Add Book{% endblock %}
-
-{% block bar_add_book %}class="active"{% endblock %}
+{% block title %}Review Book{% endblock %}
 
 {% block body %}
 
-<form action = "/add-book" method = "POST">
-  <div class = "add-book">
-    <label>Title</label>
-    <input type = "text" name = "title"\>
+<form action = "/review-book" method = "POST">
+    <div class="review-book">
+        <label>How useful was this book?</label>
+        <label>1-10</label>
+        <input type="text" name="Q1" \>
 
-    <label>Author(s)</label>
-    <input type = "text" name = "author"\>
+        <label>What was the book used for?</label>
+        <label>Reading, Problems, both, other</label>
+        <input type="text" name="Q2" \>
 
-    <label>ISBN</label>
-    <input type = "text" name = "isbn"\>
-
-
-    <label>Professor (Optional)</label>
-    <input type = "text" name = "professor"\>
+        <label>What did you pay for the book?</label>
+        <label>$0, 10,...100+</label>
+        <input type="text" name="Q3" \>
 
 
-    <label>Class (Optional)</label>
-    <input type = "text" name = "course"\>
+        <label>Date</label>
+        <label>MM/DD/YYYY</label>
+        <input type="text" name="Q4" \>
 
-    <input type="submit" value="Submit"\>
-  </div>
+
+        <label>Are you satisfied with your book?</label>
+        <label>Yes/No</label>
+        <input type="text" name="Q5" \>
+
+        <input type="submit" value="Submit" \>
+    </div>
 </form>
 
 
 
 <style type="text/css">
-    .add-book {
+    .review-book {
       margin: 0 auto;
       width: 210px;
     }
 
-    .add-book label{
-      display: inline-block;
-      text-align: right;
+    .review-book label{
+      text-align: center;
       float: left;
       margin: 10px;
     }
 
-    .add-book input{
+    .review-book input{
       display: inline-block;
       text-align: left;
       float: right;
