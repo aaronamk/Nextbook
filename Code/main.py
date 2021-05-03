@@ -40,8 +40,9 @@ def results():
         return redirect(url_for("book_page", isbn = request.args["q"]))
     if request.args["filter"] == "professor": # not yet supported
         return render_template("results.html", results="")
-    if request.args["filter"] == "class":
-        return redirect(url_for("class_page", title = request.args["q"]))
+    if request.args["filter"] == "class": #not yet supported
+        #return redirect(url_for("class_page", title = request.args["q"]))
+        return render_template("results.html", results="")
 
     # covers all other search filters
     results = query_db(f"SELECT * FROM textbook WHERE { request.args['filter'] } LIKE '%{ request.args['q'] }%'")
@@ -59,7 +60,7 @@ def course_list():
 def class_page(title):
     #0 = id, 1 = title, 2 = professor, 3 = wiki
     class_info = query_db("select * from course where title = ?", [title])
-    if len(class_info) > 0:
+    if len(class_info) > 1:
         return render_template("class-page.html",
                                 title = title,
                                 course = class_info[0],
