@@ -60,6 +60,11 @@ def course_list():
 def class_page(title):
     #0 = id, 1 = title, 2 = professor, 3 = wiki
     class_info = query_db("select * from course where title = ?", [title])
+    if title == "csci303":
+        return render_template("class-page.html",
+                                title = "CSCI 303 Algorithms",
+                                course = "CSCI 303",
+                                professor = "Zhenming Liu")
     if len(class_info) > 1:
         return render_template("class-page.html",
                                 title = title,
