@@ -13,7 +13,8 @@ CREATE TABLE course (
 CREATE TABLE textbook (
   isbn INTEGER PRIMARY KEY NOT NULL,
   title TEXT NOT NULL,
-  author TEXT NOT NULL
+  author TEXT NOT NULL,
+  id INTEGER
 );
 
 CREATE TABLE review (
