@@ -1,0 +1,1 @@
+This prototype provides a working SQLite database and a front end for interacting with it. Currently, one can add, query, and leave feedback on textbooks. They can also view the feedback of other students.
